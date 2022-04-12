@@ -5,6 +5,30 @@
     <title>Title</title>
 </head>
 <body>
-{{ text }}
+
+{% if object_list %}
+    <table border="1">
+        <tr>
+            <td>ID</td>
+            <td>Дата</td>
+            <td>Имя</td>
+            <td>Телефон</td>
+        </tr>
+
+        {% for obj in object_list %}
+            <tr>
+                <td>{{ obj.id }}</td>
+                <td>{{ obj.order_dt }}</td>
+                <td>{{ obj.order_name }}</td>
+                <td>{{ obj.order_phone }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+    {% else %}
+    <p>Данные отсутствуют</p>
+{% endif %}
+
+
 </body>
 </html>

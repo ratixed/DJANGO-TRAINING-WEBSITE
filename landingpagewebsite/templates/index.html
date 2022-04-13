@@ -1,34 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
-{% if object_list %}
-    <table border="1">
-        <tr>
-            <td>ID</td>
-            <td>Дата</td>
-            <td>Имя</td>
-            <td>Телефон</td>
-        </tr>
+    <img src="{% static 'img\1.png' %}" alt="" height="700">
 
-        {% for obj in object_list %}
+    <form action="{% url 'thanks_page' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">ОТПРАВИТЬ</button>
+    </form>
+
+    <br><br><br><br><br><br>
+
+    {% if object_list %}
+        <table border="1">
             <tr>
-                <td>{{ obj.id }}</td>
-                <td>{{ obj.order_dt }}</td>
-                <td>{{ obj.order_name }}</td>
-                <td>{{ obj.order_phone }}</td>
+                <td>ID</td>
+                <td>Дата</td>
+                <td>Имя</td>
+                <td>Телефон</td>
             </tr>
-        {% endfor %}
 
-    </table>
-    {% else %}
-    <p>Данные отсутствуют</p>
-{% endif %}
+            {% for obj in object_list %}
+                <tr>
+                    <td>{{ obj.id }}</td>
+                    <td>{{ obj.order_dt }}</td>
+                    <td>{{ obj.order_name }}</td>
+                    <td>{{ obj.order_phone }}</td>
+                </tr>
+            {% endfor %}
 
+        </table>
+        {% else %}
+        <p>Данные отсутствуют</p>
+    {% endif %}
 
-</body>
-</html>
+{% endblock %}
